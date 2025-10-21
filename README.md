@@ -6,7 +6,7 @@
 ---
 
 ## 🧩 1. Repository Structure
-
+```
 yolo-pose-project/
 │
 ├── data/ # サンプル画像・動画（.gitignore 対象）
@@ -18,7 +18,7 @@ yolo-pose-project/
 ├── requirements_no_torch.txt # PyTorch 抜き（移植・軽量用）
 ├── .gitignore
 └── yolo11n.pt # モデル重みファイル
-
+```
 
 ---
 
