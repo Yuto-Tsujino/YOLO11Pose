@@ -1,0 +1,79 @@
+# YOLO-Pose Project
+
+2D pose estimation pipeline using **Ultralytics YOLO**  
+Windows (PowerShell + venv) と Linux (Conda + Python 3.10) で共通動作します。
+
+---
+
+## 🧩 1. Repository Structure
+yolo-pose-project/
+│
+├── data/ # sample images, videos (ignored by .gitignore)
+├── weights/ # trained models (ignored)
+├── scripts/
+│ ├── setup_linux_venv.sh # Linux用自動セットアップ
+│ └── check_env.ps1 # Windows環境チェッカー
+├── requirements_full.txt
+├── requirements_no_torch.txt # Torch抜き移植用
+├── .gitignore
+└── yolo11n.pt # model weight file
+
+---
+
+## 🪟 2. Windows Setup (venv + PowerShell)
+
+```powershell
+# プロジェクトへ
+cd C:\yolo-pose-project
+
+# venv 有効化
+.\yolo_env\Scripts\activate
+python -V     # Python 3.13 など
+
+# 依存導入
+pip install -r requirements_no_torch.txt
+
+# CUDA 版 PyTorch を追加 (例: cu126)
+pip install --index-url https://download.pytorch.org/whl/cu126 torch torchvision torchaudio
+
+# 動作確認
+yolo checks
+python - <<'PY'
+from ultralytics import YOLO
+YOLO("yolo11n.pt")
+print("✅ Ultralytics OK on Windows")
+PY
+
+# conda 環境作成
+conda create -n yolo_env python=3.10 -y
+conda activate yolo_env
+
+# 依存導入
+pip install -r requirements_no_torch.txt
+
+# CUDA 世代を確認
+nvidia-smi   # → 例: CUDA 12.1 なら cu121 を選択
+
+# Torch 導入
+pip install --index-url https://download.pytorch.org/whl/cu121 torch torchvision torchaudio
+
+# 確認
+yolo checks
+python - <<'PY'
+from ultralytics import YOLO
+YOLO("yolo11n.pt")
+print("✅ Ultralytics OK on Linux (Conda 3.10)")
+PY
+yolo pose predict model=yolo11n.pt source=0 device=0
+
+---
+
+## 次の操作（PowerShell）
+```powershell
+@'
+<上記内容>
+'@ | Out-File -Encoding UTF8 README.md
+
+git add README.md
+git commit -m "Add cross-platform README (Windows venv + Linux conda + XIMEA)"
+git push
