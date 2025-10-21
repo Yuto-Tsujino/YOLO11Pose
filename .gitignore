@@ -1,0 +1,27 @@
+﻿# === Python / venv ===
+venv/
+yolo_env/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# === Local artifacts (大きい/生成物) ===
+weights/
+data/
+outputs/
+checkpoints/
+checkpoint/
+runs/
+logs/
+
+# === Notebooks ===
+.ipynb_checkpoints/
+
+# === OS 一時ファイル ===
+.DS_Store
+Thumbs.db
+
+# === IDE ===
+.vscode/
+.idea/
